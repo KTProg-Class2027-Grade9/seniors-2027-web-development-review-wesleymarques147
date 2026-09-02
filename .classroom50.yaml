@@ -1,0 +1,12 @@
+schema: "classroom50/repo-config/v1"
+classroom: "seniors-2027"
+assignment: "web-development-review"
+owner:
+  username: "wesleyMarques147"
+  id: 155471283
+  accepted_at: "2026-09-02T14:07:07Z"
+source:
+  owner: "plesieur"
+  owner_id: 71508910
+  repo: "HTML-Starter-3"
+  branch: "main"
