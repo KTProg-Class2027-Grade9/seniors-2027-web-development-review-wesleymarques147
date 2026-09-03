@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login - A World of Adventure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <main class="container" style="padding:60px 0;">
+        <section class="contact" style="max-width:440px; margin:0 auto;">
+            <h2 style="margin-top:0">Welcome back</h2>
+            <p style="color:var(--muted)">Sign in or register to start booking packages.</p>
+
+            <form id="auth-form">
+                <label for="auth-email">Email</label>
+                <input id="auth-email" type="email" placeholder="name@domain.com" required>
+
+                <label for="auth-pass">Password</label>
+                <input id="auth-pass" type="password" placeholder="Choose a password" required>
+
+                <div style="display:flex; gap:8px; margin-top:12px;">
+                    <button type="button" id="register-btn" class="btn">Register</button>
+                    <button type="button" id="login-btn" class="btn" style="background:#06ad5e">Log in</button>
+                </div>
+
+                <div id="auth-msg" class="error" aria-live="polite" style="margin-top:10px"></div>
+            </form>
+
+            <p style="margin-top:14px; color:var(--muted); font-size:14px">This demo stores credentials locally in your browser only. Do not use a real password you need elsewhere.</p>
+        </section>
+    </main>
+
+    <script src="login.js" defer></script>
+</body>
+</html>
