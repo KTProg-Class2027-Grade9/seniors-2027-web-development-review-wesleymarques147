@@ -1,46 +1,260 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>My website project</title>
-    <link rel="stylesheet" type="text/css" href="index.css" />
-    <script src="script.js" defer></script>
-  </head>
-  <body>
-    <header class="navbar">
-      <div class="nav-ingdfgner">
-        <div class="logo"tfg\\\>MySite</div>
-        Ikaro was herre
-        <nav class="nav-links">
-          <a href="#">Hfddfshfgsdf sey mdeome</a>
-          <a href="#">About</a>
-          <a href="#">Chgfhontact</a>
-        </nav>
-      </div>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Travel Agency - Professional Look</title>
+    <!-- Google Font for nicer typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <script>
+    // Require login before accessing the booking site. If not logged in, go to login page.
+    try {
+      const logged = localStorage.getItem('loggedIn');
+      if (logged !== 'true') {
+        // allow the login page itself to load
+        if (!location.pathname.endsWith('/login.html') && !location.pathname.endsWith('login.html')) {
+          location.replace('login.html');
+        }
+      }
+    } catch (e) {
+      console.warn('Auth check failed', e);
+    }
+    </script>
+    <header class="top-nav">
+        <div class="container">
+            <h1 class="brand">A World of Adventure</h1>
+            <nav>
+                <a href="paris.html">Paris</a>
+                <a href="tokyo.html">Tokyo</a>
+                <a href="bali.html">Bali</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-      <section class="hero">
-        <h1>My website project</h1>
-        <p>Sample content below the fixed navigation bar.</p>
-      </section>
+    <!-- Warning shown when files are opened directly (file://). APIs require serving via http(s). -->
+    <div id="server-warning" class="contact" style="display:none; margin:12px;">
+        <strong>Notice:</strong> Live weather, time, and exchange rate data require the site to be served over HTTP/HTTPS.
+        If you opened this file directly (file://), the live data will not load. To fix this:
+        <ul>
+            <li>Run a simple local server (recommended): open a terminal in the project folder and run <code>python -m http.server</code> (then visit <code>http://localhost:8000</code>).</li>
+            <li>Or use an editor extension like Live Server to preview the site.</li>
+        </ul>
+    </div>
 
-      <section class="content-sample">
-        <!-- repeated paragraphs so the page can scroll and demonstrate the fixed navbar -->
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <p>Praesent ut ligula non mi varius sagittis.</p>
-        <p>Sed cursus ante dapibus diam. Sed nisi.</p>
-        <p>Nulla quis sem at nibh elementum imperdiet.</p>
-        <p>Duis sagittis ipsum. Praesent mauris.</p>
-        <p>Fusce nec tellus sed augue semper porta.</p>
-        <p>Mauris massa. Vestibulum lacinia arcu eget nulla.</p>
-        <p>Class aptent taciti sociosqu ad litora torquent.</p>
-        <p>Curabitur sodales ligula in libero.</p>
-        <p>Sed dignissim lacinia nunc. Curabitur tortor.</p>
-        <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.</p>
-        <p>Donec rutrum congue leo eget malesuada.</p>
-      </section>
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="container">
+            <div>
+                <h2>Discover destinations you'll remember forever</h2>
+                <p>Handpicked vacation packages with transparent pricing. Explore Paris, Tokyo, and Bali.</p>
+                <a href="#contact" class="hero-cta">Get special offers</a>
+            </div>
+            <!-- Promo video -->
+            <div style="margin-top:18px">
+                <iframe width="420" height="236" src="https://www.youtube.com/embed/Scxs7L0vhZ4" title="Promo video" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="places-grid">
+            <!-- Paris card -->
+            <section id="paris" class="place" data-lat="48.8566" data-lon="2.3522" data-currency="EUR" data-timezone="Europe/Paris">
+                <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1200&q=60&auto=format&fit=crop" alt="Eiffel Tower" />
+                <div class="content">
+                    <h3>Paris</h3>
+                    <p>See the Eiffel Tower, museums, and delicious food.</p>
+
+                    <div class="live-data">
+                        <div>Weather: <strong class="weather">—</strong></div>
+                        <div>Local time: <strong class="local-time">—</strong></div>
+                        <div>Exchange: <strong class="exchange">—</strong></div>
+                    </div>
+
+                    <div class="pricing">
+                        <label>Nights: <input type="number" id="nights-paris" value="3" min="1"></label>
+                        <label>
+                            Hotel:
+                            <select id="hotel-paris">
+                                <option value="120">3-star ($120/night)</option>
+                                <option value="200">4-star ($200/night)</option>
+                                <option value="350">5-star ($350/night)</option>
+                            </select>
+                        </label>
+                        <div class="extras">
+                            <label><input type="checkbox" class="extra" data-price="50"> Seine river cruise ($50)</label>
+                            <label><input type="checkbox" class="extra" data-price="30"> Museum pass ($30)</label>
+                        </div>
+                        <div class="total">Total: $<span id="total-paris">0</span></div>
+                    </div>
+
+                    <div class="links">
+                        <a href="https://www.google.com/flights" target="_blank" rel="noopener">Book flights</a> ·
+                        <a href="https://www.rentalcars.com" target="_blank" rel="noopener">Car rental</a>
+                    </div>
+
+                    <div class="gallery">
+                        <a href="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1600&q=60&auto=format&fit=crop" target="_blank">View photos</a>
+                        <a class="btn details" href="paris.html">Open Paris page</a>
+                        <button class="btn share" data-city="Paris">Share</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tokyo card -->
+            <section id="tokyo" class="place" data-lat="35.6895" data-lon="139.6917" data-currency="JPY" data-timezone="Asia/Tokyo">
+                <img src="https://images.unsplash.com/photo-1549693578-d683be217e58?w=1200&q=60&auto=format&fit=crop" alt="Tokyo skyline" />
+                <div class="content">
+                    <h3>Tokyo</h3>
+                    <p>Modern city, temples, and great food.</p>
+
+                    <div class="live-data">
+                        <div>Weather: <strong class="weather">—</strong></div>
+                        <div>Local time: <strong class="local-time">—</strong></div>
+                        <div>Exchange: <strong class="exchange">—</strong></div>
+                    </div>
+
+                    <div class="pricing">
+                        <label>Nights: <input type="number" id="nights-tokyo" value="4" min="1"></label>
+                        <label>
+                            Hotel:
+                            <select id="hotel-tokyo">
+                                <option value="100">3-star ($100/night)</option>
+                                <option value="180">4-star ($180/night)</option>
+                                <option value="300">5-star ($300/night)</option>
+                            </select>
+                        </label>
+                        <div class="extras">
+                            <label><input type="checkbox" class="extra" data-price="40"> Sushi experience ($40)</label>
+                            <label><input type="checkbox" class="extra" data-price="25"> Temple tour ($25)</label>
+                        </div>
+                        <div class="total">Total: $<span id="total-tokyo">0</span></div>
+                    </div>
+
+                    <div class="links">
+                        <a href="https://www.google.com/flights" target="_blank" rel="noopener">Book flights</a> ·
+                        <a href="https://www.japanrailpass.net" target="_blank" rel="noopener">Trains</a>
+                    </div>
+
+                    <div class="gallery">
+                        <a href="https://images.unsplash.com/photo-1549693578-d683be217e58?w=1600&q=60&auto=format&fit=crop" target="_blank">View photos</a>
+                        <a class="btn details" href="tokyo.html">Open Tokyo page</a>
+                        <button class="btn share" data-city="Tokyo">Share</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bali card -->
+            <section id="bali" class="place" data-lat="-8.3405" data-lon="115.0920" data-currency="IDR" data-timezone="Asia/Makassar">
+                <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=60&auto=format&fit=crop" alt="Bali beach" />
+                <div class="content">
+                    <h3>Bali</h3>
+                    <p>Relax on beaches and enjoy nature.</p>
+
+                    <div class="live-data">
+                        <div>Weather: <strong class="weather">—</strong></div>
+                        <div>Local time: <strong class="local-time">—</strong></div>
+                        <div>Exchange: <strong class="exchange">—</strong></div>
+                    </div>
+
+                    <div class="pricing">
+                        <label>Nights: <input type="number" id="nights-bali" value="5" min="1"></label>
+                        <label>
+                            Hotel:
+                            <select id="hotel-bali">
+                                <option value="60">3-star ($60/night)</option>
+                                <option value="120">4-star ($120/night)</option>
+                                <option value="220">5-star ($220/night)</option>
+                            </select>
+                        </label>
+                        <div class="extras">
+                            <label><input type="checkbox" class="extra" data-price="70"> Day trip to Ubud ($70)</label>
+                            <label><input type="checkbox" class="extra" data-price="50"> Snorkeling ($50)</label>
+                        </div>
+                        <div class="total">Total: $<span id="total-bali">0</span></div>
+                    </div>
+
+                    <div class="links">
+                        <a href="https://www.google.com/flights" target="_blank" rel="noopener">Book flights</a> ·
+                        <a href="https://www.viator.com/" target="_blank" rel="noopener">Tours</a>
+                    </div>
+
+                    <div class="gallery">
+                        <a href="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=60&auto=format&fit=crop" target="_blank">View photos</a>
+                        <a class="btn details" href="bali.html">Open Bali page</a>
+                        <button class="btn share" data-city="Bali">Share</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Simple contact form with email validation -->
+        <section id="contact" class="contact" style="margin-top:20px;">
+            <h3>Join our mailing list</h3>
+            <form id="signup">
+                <label for="email">Email:</label>
+                <input id="email" type="email" placeholder="name@domain.com" required>
+                <div id="email-error" class="error" aria-live="polite"></div>
+                <button type="submit" class="btn">Subscribe</button>
+            </form>
+        </section>
+        <!-- Reservation guidelines -->
+        <section id="guidelines" class="contact" style="margin-top:20px;">
+            <h3>Reservation Guidelines</h3>
+            <ul>
+                <li>Deposit: A 20% deposit is required to secure most packages.</li>
+                <li>Cancellation: Free cancellation within 48 hours of booking. After that, fees may apply depending on supplier rules.</li>
+                <li>Changes: Date or traveler changes may incur additional fees.</li>
+                <li>Travel documents: Customers are responsible for valid passports and visas.</li>
+            </ul>
+        </section>
+
+        <!-- Travel planner -->
+        <section id="planner" class="contact" style="margin-top:20px;">
+            <h3>Travel Planner</h3>
+            <form id="planner-form">
+                <label for="plan-destination">Destination</label>
+                <select id="plan-destination">
+                    <option value="paris">Paris</option>
+                    <option value="tokyo">Tokyo</option>
+                    <option value="bali">Bali</option>
+                </select>
+
+                <label for="plan-start">Start date</label>
+                <input id="plan-start" type="date">
+
+                <label for="plan-nights">Nights</label>
+                <input id="plan-nights" type="number" value="3" min="1">
+
+                <div id="plan-extras"></div>
+
+                <div style="margin-top:12px">
+                    <button id="plan-btn" type="button" class="btn">Plan trip</button>
+                </div>
+            </form>
+
+            <div id="plan-result" style="margin-top:12px; background:#fff; padding:12px; border-radius:8px; display:none"></div>
+        </section>
     </main>
-  </body>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="col">
+                    <strong>A World of Adventure</strong>
+                    <p>123 Explorer Lane<br>Adventure City, AC 12345</p>
+                </div>
+                <div class="col">
+                    <p>Phone: (555) 123-4567<br><a href="#contact">Contact us</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
 </html>
